@@ -1,4 +1,4 @@
 # VoterMapApp
 Application of Interactive Map Showing Global Voter Turnout
 
-[[[Map.png|width=50px]]](link-to-blog)
+[![Voter Map](https://i.imgur.com/imV5Fut.png)](link-to-app)
