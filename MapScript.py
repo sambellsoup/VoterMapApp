@@ -5,14 +5,15 @@
 
 
 # Data handling
+import pickle
 import pandas as pd
 import numpy as np
 
 # Bokeh libraries
-from bokeh.io import output_file, output_notebook
+from bokeh.io import output_file, show, curdoc
 from bokeh.plotting import figure, show
-from bokeh.models import ColumnDataSource
-from bokeh.layouts import row, column, gridplot
+from bokeh.models import ColumnDataSource, HoverTool
+from bokeh.layouts import row, column, gridplot, widgetbox, layout
 from bokeh.models.widgets import Tabs, Panel
 
 #Plotting
@@ -20,9 +21,11 @@ import geopandas as gpd
 
 fig = figure()
 
+#Load election dataframe
+f = open('Elections.pckl', 'rb')
+df = pickle.load(f)
+f.close
 
-df = pd.read_csv('cleanfeatures.csv', index_col=0)
-df.rename(columns={'Election type':'Election_type'}, inplace=True)
 
 # Import reset_output (only needed once)
 from bokeh.plotting import reset_output
@@ -96,6 +99,7 @@ slider.on_change('value', update_plot)
 # Make a column layout of widgetbox(slider) and plot, and add it to the current document
 layout = column(p,widgetbox(slider))
 curdoc().add_root(layout)
+curdoc().title="Global Voter Turnout"
 
 #Display plot
 show(layout)
